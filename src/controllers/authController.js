@@ -10,13 +10,13 @@ export const signup = async (req, res) => {
       return res.json({message: "All feilds are required"});
     }
 
-    // check user exist
+  
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.json({ message: "User already exists" });
     }
 
-    // hash password
+   
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
@@ -42,19 +42,19 @@ export const login = async (req, res) => {
       return res.json({message: "All feilds are required"});
     }
 
-    //check email
+    
     const user = await User.findOne({ email });
     if (!user) {
       return res.json({ message: "User not found" });
     }
 
-    // check password
+  
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.json({ message: "Invalid password" });
     }
 
-    // create token
+  
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });

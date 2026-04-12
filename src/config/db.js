@@ -8,7 +8,7 @@ const connectDB = async () => {
 
   } catch (error) {
     console.error("DB Error:", error.message);
-    process.exit(1); // server band kar dega agar DB connect na ho
+    process.exit(1);
   }
 };
 
